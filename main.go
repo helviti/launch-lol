@@ -63,7 +63,7 @@ func EditRiotClientSettings() {
 		log.Fatal(err)
 	}
 
-	err = yaml.Unmarshal(data, config)
+	err = yaml.Unmarshal(data, &config)
 
 	if config.Install.Globals.Locale == "en_US" {
 		return
@@ -83,7 +83,7 @@ func KillRiotClient() {
 	kill := exec.Command("taskkill", "/im", "RiotClientServices.exe", "/T", "/F")
 	err := kill.Run()
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 }
 
@@ -99,7 +99,7 @@ func LaunchLeague() {
 
 func main() {
 	KillRiotClient()
-	EditRiotClientSettings()
+	// EditRiotClientSettings()
 	EditLeageueClientConfig()
 	LaunchLeague()
 }
